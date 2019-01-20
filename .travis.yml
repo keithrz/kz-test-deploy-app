@@ -5,6 +5,8 @@ node_js: 8.11.0
 addons:
   ssh_known_hosts: 18.191.210.81
 
+script: npm run build
+
 deploy:
   provider: script
   skip_cleanup: true
