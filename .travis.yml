@@ -1,9 +1,7 @@
 language: node_js # from https://docs.travis-ci.com/user/tutorial/
 
-#deploy: # from https://docs.travis-ci.com/user/deployment/custom/
-#  - eval "$(ssh-agent -s)" #start the ssh agent
-#  - chmod 600 .travis/deploy_key.pem # this key should have push access
-#  - ssh-add .travis/deploy_key.pem
 deploy:
-  - git remote add deploy ssh://bitnami@http://18.191.210.81/~/repos/kz-test-deploy-app
-  - git push deploy
+  provider: script
+  script: bash deploy/deploy.sh
+  on:
+    branch: master
