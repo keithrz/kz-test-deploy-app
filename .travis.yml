@@ -10,7 +10,7 @@ script: npm run build
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build bitnami@18.191.210.81/~/projects/kz-test-deploy-app
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build bitnami@18.191.210.81:~/projects/kz-test-deploy-app
   on:
     branch: master
 
