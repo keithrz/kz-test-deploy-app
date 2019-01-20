@@ -1,4 +1,5 @@
 language: node_js # from https://docs.travis-ci.com/user/tutorial/
+node_js: 8.10
 
 deploy:
   provider: script
