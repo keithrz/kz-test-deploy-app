@@ -1,21 +1,13 @@
 language: node_js
-
 node_js: 8.11.0
-
-addons:
-  ssh_known_hosts: 18.191.210.81
-
 script: npm run build
-
 deploy:
-  provider: script
+  provider: s3
+  access_key_id:
+    secure: BGaiZgj3vqNZb0aj4WyuPL33k3E7X55kIsWzxcU9s8SeRktd1elUxYkozRj/gseR2shgzRvFjLaJ4RlEPWZKczWMZE38077wnl+PBiEQhqcE0kVzsbO6FQDIbEJ4ya0n4oJt004l0NRSrqoQzP7sJgAYMvz+ESYujBbkzcOnKXdIbhCvG2T4mo9n3cAMYg61cqT83yuxT2cxQ7NZvVeRHJ3bWWqbhysbguqtY7FhRnRRFJ2KdRUfRotrf3cKzf/u5zLRX0A0Yg6LkGFBT/yesgo1tyM5DJSaxQEuphjFi4PagugSIwRDJk43UiXDrxCGPvBgq9QaM91skPuRNtZevJRJOPznFHPkeYjwsWIhmQdLl6gTc+BUl1LJgzLfre3Vk12QIZstXJplslxqE4/bOcTnt35pDU+hZ7Iih2ThOoRHK+pY0Efzzzrpcl7GaHkEHgXbdgquab2f9t/RX/16LLgQyO6bSMOTTc5OvT6sCXpJ+/KJnFrCPxvZ7rSWbJ3HxHHy6R0OvsdfnaT1daIow7SMXc2ajN8ZMQZz8SlNT9ccCmDEMqLJ0sFWZvsdWqNmpX1MNK0iCImEoyAAe3QqdwJYHpzMSJ6HItKm6RuX5ustt4tjiornxT0Ah+hBexT+AF7lx5BVcZZYpQGmRS4P0YeKV0qXJy3RmcD22EhdjjE=
+  secret_access_key:
+    secure: IP3rOPtZKo2Sey704DEHIacQA2/x7tEeFtVm472xTNgJvjN+GAfE45mIEPokmj1WaDdrLs1y462fJIW2KGw8X+uV7upoKMmzOB62jWhQrcYsuqhO8Y0AkbrF5ZtOqoy61tm0WGTW46paneq6m5SUZKOHY4O3sY/KVrN3K4PmgB94/BZiCgWoTRLLanZ8RLY9XWSuvuAhgJNzpAN7n1Q1G8/iuDZv7r2fQzvYQGE8K3lfTD5cvS6PbGKFoRad0GaKBef73EYyPSUKSuxsUh7oVMI5gtUvoFHaX+35QRfMpAjPqtRNlMYzdyXFcjKDSKkfUt1g+py6IpMgi0gn7fDU0x+ST9Nu/Z0CviHjMIa5TyLg789pkd+Em8l9C/8lU/ys8v57WVig98c+szJuPaJwK1nlPgEwRIbgRWVY4xFI9up+XmlEt+RAsBQ72wtLi0PhRkETjz/UWpWXb/DBsMlmdvyQG5lOUZ/IEKJZycczGv9zPLLzBm6Ji5T+7rric+BXKP/Og/3ZfpjmrtoMbJOUCBfIYKD4LEC7pbg2UylwGHvcOYOB4VD62E0GcmqtvcRamqh3Rc4/lPZUn+M8S5eDXPtRJFiQaztbzFkNywWkwBHeTNSwlQQcE0gs8LkU6aFWBZ9c4n1XZzEiBTUdupwQAXnhxSnqdUMTmRRX/v4Pzyc=
+  bucket: kz-test-deploy-web
   skip_cleanup: true
-  script: rsync -qazr --delete-after $TRAVIS_BUILD_DIR/build/ bitnami@18.191.210.81:~/projects/kz-test-deploy-app/
-  on:
-    branch: master
-
-before_deploy:
-- openssl aes-256-cbc -K $encrypted_6d205d8f525f_key -iv $encrypted_6d205d8f525f_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
-- eval "$(ssh-agent -s)"
-- chmod 600 /tmp/deploy_rsa
-- ssh-add /tmp/deploy_rsa
+  local_dir: build
+  upload-dir: stage
