@@ -12,7 +12,7 @@ deploy:
   skip_cleanup: true
   script:
     rsync -qazr --delete-after $TRAVIS_BUILD_DIR/build/ bitnami@18.191.210.81:~/projects/kz-test-deploy-app/;
-    ssh bitnami@18.191.210.81 cp -r ~/env/kz-test-deploy-app/* ~/projects/kz-test-deploy-app
+    ssh bitnami@18.191.210.81 "cp -r ~/env/kz-test-deploy-app/* ~/projects/kz-test-deploy-app"
   on:
     branch: lightsail-deploy
 
