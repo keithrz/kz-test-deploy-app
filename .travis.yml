@@ -24,4 +24,5 @@ deploy:
     upload-dir: prod
     on:
       tag: true
+      all_branches: true
       condition: $TRAVIS_TAG =~ ^release-.?$
