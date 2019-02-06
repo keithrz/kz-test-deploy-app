@@ -23,6 +23,6 @@ deploy:
     local_dir: build
     upload-dir: prod
     on:
-      tag: true
+      tags: true
       all_branches: true
-      condition: $TRAVIS_TAG =~ ^release-.?$
+      condition: "$TRAVIS_TAG =~ ^release-.?$"
