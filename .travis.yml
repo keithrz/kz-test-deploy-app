@@ -23,5 +23,5 @@ deploy:
     local_dir: build
     upload-dir: prod
     on:
-      branch: master
+      tag: true
       condition: $TRAVIS_TAG =~ ^release-.?$
